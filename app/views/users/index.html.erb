@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>社員管理</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>年齢</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.age %></td>
+        <td><%= link_to '詳細', user %></td>
+        <td><%= link_to '編集', edit_user_path(user) %></td>
+        <td><%= link_to '削除', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<!--↓デフォルト↓-->
+<%= link_to '新規登録', new_user_path %>
+<br><br>
+<!--↓ただのリンクにボタンコマンドを入れても通らない！↓-->
+<%= link_to '新規登録', new_user_path, :class => 'btn btn-primary' %>
+<br><br>
+<!--↓『button_to』にしただけではGETとPOSTが一致しない！↓-->
+<%= button_to '新規登録', new_user_path, :class => 'btn btn-primary' %>
+<br><br>
+<!--↓成功例↓　参照https://qiita.com/EastResident/items/11cd287ef7a8927318cf-->
+<%= button_to "新規作成", {controller: 'users', action: 'new'}, {method: :get, class: "btn btn-primary"} %>
